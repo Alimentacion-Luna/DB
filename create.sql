@@ -1,9 +1,11 @@
 CREATE TABLE Pedidos
 (
-    id_pedido    INT   NOT NULL PRIMARY KEY,
-    id_proveedor INT   NOT NULL,
-    fecha_pedido DATE  NOT NULL,
-    precio_total MONEY NOT NULL
+    id_pedido    INT         NOT NULL PRIMARY KEY,
+    id_proveedor INT         NOT NULL,
+    fecha_pedido DATE        NOT NULL,
+    precio_total MONEY       NOT NULL,
+    estado       VARCHAR(10) NOT NULL default 'en curso',
+    CONSTRAINT CK_EstadoPedido CHECK (estado IN ('en curso', 'cancelado', 'recibido'))
 );
 
 CREATE TABLE Proveedor
@@ -43,10 +45,10 @@ CREATE TABLE Proveedor_Productos
 
 CREATE TABLE Productos
 (
-    id_producto     INT NOT NULL PRIMARY KEY,
-    id_tipoProducto INT NOT NULL,
+    id_producto     INT          NOT NULL PRIMARY KEY,
+    id_tipoProducto INT          NOT NULL,
     nombre          VARCHAR(500) NOT NULL,
-    impuesto        INT NOT NULL
+    impuesto        INT          NOT NULL
 );
 
 -- Añadir restricciones de clave foránea
